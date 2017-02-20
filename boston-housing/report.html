@@ -11779,7 +11779,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import libraries necessary for this project</span>
@@ -11852,23 +11852,23 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[86]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Minimum price of the data</span>
-<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Maximum price of the data</span>
-<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Mean price of the data</span>
-<span class="n">mean_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">mean_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Median price of the data</span>
-<span class="n">median_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">median_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Standard deviation of prices of the data</span>
-<span class="n">std_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">std_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># Show the calculated statistics</span>
 <span class="k">print</span> <span class="s2">&quot;Statistics for Boston housing dataset:</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -11895,7 +11895,7 @@ Minimum price: $105,000.00
 Maximum price: $1,024,800.00
 Mean price: $454,342.94
 Median price $438,900.00
-Standard deviation of prices: $165,340.28
+Standard deviation of prices: $165,171.13
 </pre>
 </div>
 </div>
@@ -12090,7 +12090,7 @@ Yes, this model successfully captures the variation of the target variable as we
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;train_test_split&#39;</span>
@@ -13210,6 +13210,9 @@ IiIiIjpGBkAREREREdExMgCKiIiIiIiO8Td4TIRHV3k/rgAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's choose 2nd graph with <code>max_depth</code> equals 3, for this particular instance it can be seen from graph that beyond 300 training points the model has not learnt anything that would noticeably improve/degrade the correctness(in terms of r^2) of the model implying model has reached saturation so niether <strong><code>training</code></strong> curve nor <strong><code>testing</code></strong> curve would show improvements on adding more training points; also implying arguably, that adding more training points won't help improving the model noticeably.</p>
+<p><strong>updates after 1st review</strong></p>
+<p>For model with <code>max_depth</code> 3 if we add more data points the testing curve will increase and degrade model performance as can be seen from graph that between 300-350 points at the given complexity(max_depth=3) the testing curve is the lowest, implying that at the given complexity the model learnt the best between 300-350 data point if more data are introduced at this complexity the learning cant rise and will go down as saturation has been reached.</p>
+<p>The covergence/level-off of testing curve and training curve can be seen between 300-350</p>
 
 </div>
 </div>
@@ -13671,9 +13674,11 @@ Y4wJGJb0jDHGBIz/B2/0HB7w/HSkAAAAAElFTkSuQmCC
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>At <code>depth</code> 1 model suffers from high bias as the low r2 score can be attributed to fact that model ignores underlying patterns in data(implied by low training r2 score).</li>
-<li>At <code>depth</code> 10 the model is overfitted to training data implied by high r2 score on training data, so its model suffers from high variance causing decrease of low r2 score(with complexity) on training data.</li>
-<li>As the model complexity increases uptil <code>depth</code> <code>3</code> the performance of model increases on both training/test data, after <code>depth</code>  the model performs better for training data, on contrast the performance decreases on test set; So at <code>depth</code> of 2 we have the sweet spot i.e low-variance low bias model.</li>
+<li>At <code>depth</code> 10 the model is overfitted to training set implied by high r2 score on training set, so model suffers from high variance causing decrease of low r2 score on test set.</li>
+<li>As the model complexity increases uptil <code>depth</code> <code>3</code> the performance of model increases on both training/test set, after <code>depth</code>  the model performs better for training set, on contrast the performance decreases on test set; So at <code>depth</code> of 2 we have the sweet spot i.e low-variance low bias model.</li>
 </ul>
+<p><strong>updates after 1st review</strong>(made correction in 2nd point, above)</p>
+<p>large difference between training and validation/testing performance is an implication that model suffers from high variance, we can say that model with max_depth 10 is high variance model as estimater has knowledge of patterns that predicts on seen data with high accuracy but doesnt generalize its learning so well to test set and poorly performs on unseen data, which defeats the whole purpose of modeling.</p>
 
 </div>
 </div>
@@ -13724,7 +13729,28 @@ Y4wJGJb0jDHGBIz/B2/0HB7w/HSkAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Grid Search is the search for classifier parameters which would result in an optimal model, In this technique we build a number of models based on particular classifier class each of which are base on different combination of parameters, and cross validate these models and the model which performs best among all, the parameter that the best performing model was based on is the solution to Grid Search Problem.</p>
+<p>Grid Search is the search for classifier parameters which would result in an optimal model, In this technique we build a number of models based on particular classifier class each of which are based on different combination of parameters, and cross validate these models and the model which performs best among all, the parameter that the best performing model was based on is the solution to Grid Search Problem.</p>
+<p><strong>updates after first review</strong></p>
+<p>one model is prepared from each set of possible combinations of parameters(cartesian product) from each grid.
+Example: suppose we have 2 grids as follows</p>
+<p>param_grid = [
+  {'C': [1, 10, 100, 1000], 'kernel': ['linear']},
+  {'C': [1, 10, 100, 1000], 'gamma': [0.001, 0.0001], 'kernel': ['rbf']},
+ ]</p>
+<p>1st grid is {'C': [1, 10], 'kernel': ['linear']}
+2nd grid is {'C': [1, 10], 'gamma': [0.001, 0.0001], 'kernel': ['rbf']}</p>
+<p>for 1st grid possible combinations of parameters are(cartesian product of param matrices):</p>
+<p>combination 1 : C=1, kernel=linear</p>
+<p>combination 2 : C=10, kernel =linear</p>
+<p>similarly for grid 2:</p>
+<p>combination 1 : C=1, gamma = 0.001, kernel =rbf</p>
+<p>combination2 : C=1, gamma =0.0001, kernel=rbf</p>
+<p>combination 3 : C=10, gamma = 0.001, kernel =rbf</p>
+<p>combination 4 : C=10, gamma =0.0001, kernel=rbf</p>
+<p>so based on this grid total 6 models can be prepared, each models performance can be computed independently,
+Grid search takes one of its parameter <code>n_jobs</code> which defaults to 1,i.e how many jobs to run in parallel, with default each models performance is computed one at time but on  multiprocessor system n_jobs can set to <code>n</code> to compute <code>n</code> model's performance computation at a time.</p>
+<p>performance is computed in terms of some metric which corresponds to a scoring function, the model whose performance is highest amongst 6 models , its corresponding parameters are result of grid search so are considered best parameters.</p>
+<p>Example: r2_score which can be negative(perfomance poor than naive mean horizontal model), or between 0 to 1, 0 means performance exactly same as naive mean horizontal model, 1 means 100% accuracy.</p>
 
 </div>
 </div>
@@ -13813,6 +13839,11 @@ Y4wJGJb0jDHGBIz/B2/0HB7w/HSkAAAAAElFTkSuQmCC
 <li>for each set of parameters in param grid, we compute result of k-fold cross validation technique.</li>
 <li>the set of parameters which correspond to smallest value of k-fold technique results are considered optimal parameters for the model.</li>
 </ul>
+<p><strong>updates after suggestion made in review:</strong></p>
+<p>cross validation gives a glimpse on how well the model will perform on unseen data by holding out fraction of training data as test/validation set an remaing as training set. folding strengthens CV by ensuring that model gets the chance to see and learn from all patterns available in whole labeled dataset(generalize over all data) we have and helps keep bias in moderation, as opposed to the regular way where model never gets to see the patterns in training set, cross validation makes sure all knowledge available though the dataset is used in building the model, In regular cases where model never gets to learn from test data , the model is likely to underfit the dataset</p>
+<p>why using cross-validation is so useful with grid search?</p>
+<p>lets assume CV to mean k-fold CV for simlicity.</p>
+<p>CV itself is a techinque to assure quality of the model but it doesn't deal with the parameter tuning for model(which is another model optimization techninque), combing both techniques make model more robust.</p>
 
 </div>
 </div>
@@ -13848,11 +13879,11 @@ Y4wJGJb0jDHGBIz/B2/0HB7w/HSkAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;make_scorer&#39;, &#39;DecisionTreeRegressor&#39;, and &#39;GridSearchCV&#39;</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">r2_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span>
 <span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
 
@@ -13864,13 +13895,13 @@ Y4wJGJb0jDHGBIz/B2/0HB7w/HSkAAAAAElFTkSuQmCC
     <span class="n">cv_sets</span> <span class="o">=</span> <span class="n">ShuffleSplit</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n_iter</span><span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 
     <span class="c1"># TODO: Create a decision tree regressor object</span>
-    <span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+    <span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
     <span class="c1"># TODO: Create a dictionary for the parameter &#39;max_depth&#39; with a range from 1 to 10</span>
     <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)}</span>
 
     <span class="c1"># TODO: Transform &#39;performance_metric&#39; into a scoring function using &#39;make_scorer&#39; </span>
-    <span class="n">scoring_fnc</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">r2_score</span><span class="p">)</span>
+    <span class="n">scoring_fnc</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">performance_metric</span><span class="p">)</span>
 
     <span class="c1"># TODO: Create the grid search object</span>
     <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">regressor</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">scoring_fnc</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv_sets</span><span class="p">)</span>
@@ -13910,7 +13941,7 @@ Y4wJGJb0jDHGBIz/B2/0HB7w/HSkAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Fit the training data to the model using grid search</span>
@@ -13993,13 +14024,14 @@ Y4wJGJb0jDHGBIz/B2/0HB7w/HSkAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Produce a matrix for client data</span>
 <span class="n">client_data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="c1"># Client 1</span>
                <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">22</span><span class="p">],</span> <span class="c1"># Client 2</span>
                <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">]]</span>  <span class="c1"># Client 3</span>
+
 
 <span class="c1"># Show predictions</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">price</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">client_data</span><span class="p">)):</span>
@@ -14016,7 +14048,8 @@ Y4wJGJb0jDHGBIz/B2/0HB7w/HSkAAAAAElFTkSuQmCC
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Predicted selling price for Client 1&#39;s home: $403,025.00
+<pre>19.1
+Predicted selling price for Client 1&#39;s home: $403,025.00
 Predicted selling price for Client 2&#39;s home: $237,478.72
 Predicted selling price for Client 3&#39;s home: $931,636.36
 </pre>
@@ -14032,7 +14065,21 @@ Predicted selling price for Client 3&#39;s home: $931,636.36
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Yes the prices are consistent with the correlations(as stated in answer to Question 1) between features and prices</p>
+<ul>
+<li>all 3 predict prices fall between min and max prices.</li>
+</ul>
+<p>for client 1:</p>
+<ul>
+<li>has moderate number of 'RM', 'LSTAT' and 'PTRATIO' and the predicted price is close to median.</li>
+</ul>
+<p>for client 2:</p>
+<ul>
+<li>has low 'RM' which favors low price, has high 'LSTAT' which favors lower price, and high 'PTRATIO' which also favours low price, so the predicted price is lower than other 2 clients , and close to min price. </li>
+</ul>
+<p>for client 3:</p>
+<ul>
+<li>high 'RM' favors high price, low 'LSTAT' favors high price, and low 'PTRATIO'favors high price, so predicted price must be highest amongst 3 client whcih actually is the case accornding to prediction results , and is close to max price.</li>
+</ul>
 
 </div>
 </div>
@@ -14107,6 +14154,7 @@ Range in prices: $69,044.61
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Given that dataset is collected from 1978 and the prices have been scaled to account for property price inflation that happened between 1978 and present day,Following is still an invariant: the individual features in feature set have the same correlation price that it used to be 1978 or before given the city(boston, nothing drastic happened since 1978 that would change the correlation), also the model performance is fairly good i.e ~78% so I consider the model to be useful in real-world setting.</p>
 <ul>
 <li>Its said in begining of this notebook that prices have been scaled to be relevant to present days, that implies that data is still relevant, I cant think of any other reason(given that I dont cross check with current prices on internet or real estate agents) from the context of analytical reasoning on dataset.</li>
 <li>the best regressor model(max_depth=4) shows accuracy of ~78%, for an estimate I think thats a good score for prediction and current set of feature have very good correlation with price, but if we want to have better performance we may look for one or two more features with prefernce of feature inorder of correlation magnitude to the price.</li>
